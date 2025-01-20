@@ -98,7 +98,7 @@ const mintAction = async (provider:NetworkProvider, ui:UIProvider) => {
     const res = await minterContract.sendMint(sender,
                                               mintAddress,
                                               nanoMint,
-                                              toNano('0.05'),
+                                              toNano('0.01'),
                                               toNano('0.1'));
     console.log("res mint = ",res);
     const gotTrans = await waitForTransaction(provider,
@@ -134,7 +134,7 @@ export async function run(provider: NetworkProvider) {
 
     do {
         retry = false;
-        minterAddress = await promptAddress('Please enter minter address:', ui);
+        minterAddress = await promptAddress('Please enter minter contract address:', ui);
         /*
         //const contractState = await api.getContractState(minterAddress);
         const contractState = await api.getAccount(await getLastBlock(provider), minterAddress);
