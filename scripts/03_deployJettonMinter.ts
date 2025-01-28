@@ -2,7 +2,7 @@ import { Address, toNano } from '@ton/core';
 import { JettonMinter, JettonMinterContent, jettonContentToCell, jettonMinterConfigToCell } from '../wrappers/JettonMinter';
 import { compile, NetworkProvider, UIProvider} from '@ton/blueprint';
 import { promptAddress, promptBool, promptUrl } from '../wrappers/ui-utils';
-
+// This is the right repo for jetton deployment
 const formatUrl = "https://github.com/ton-blockchain/TEPs/blob/master/text/0064-token-data-standard.md#jetton-metadata-example-offchain";
 const exampleContent = {
                           "name": "Sample Jetton",
@@ -21,7 +21,11 @@ export async function run(provider: NetworkProvider) {
 
     let admin      = await promptAddress(adminPrompt, ui, sender.address);
     ui.write(`Admin address:${admin}\n`);
-    let contentUrl = await promptUrl(urlPrompt, ui);
+    //let contentUrl = await promptUrl(urlPrompt, ui);
+    // Jetton 2
+    //let contentUrl = "https://coral-wasteful-lion-960.mypinata.cloud/ipfs/QmSi8J5STQVZptPbQXYUcTeX3ptWQ8XWNQMk34w1vLPcCB";
+    // Jetton 3
+    let contentUrl = "https://coral-wasteful-lion-960.mypinata.cloud/ipfs/bafkreiaxmp36635qid7lsnajt6vqtdlz65upkw32kwrihcteuqim6jjduy";
     ui.write(`Jetton content url:${contentUrl}`);
 
     let dataCorrect = false;
@@ -53,5 +57,5 @@ export async function run(provider: NetworkProvider) {
                                                   }, 
                                                   await compile('JettonMinter'));
 
-    await provider.deploy(minter, toNano('0.05'));
+    await provider.deploy(minter, toNano('0.01'));
 }
